@@ -38,6 +38,11 @@ jobs:
           project_dir=$(dirname "$(find projeto -name settings.gradle -print -quit)")
           echo "PROJECT_DIR=$project_dir" >> "$GITHUB_ENV"
 
+      - name: Corrigir Android minimo
+        run: |
+          sed -i -E 's/(minSdkVersion|minSdk)[[:space:]]*=?[[:space:]]*23/\1 24/g' "$PROJECT_DIR/app/build.gradle"
+          grep -nE 'minSdk' "$PROJECT_DIR/app/build.gradle"
+
       - name: Compilar APK
         run: gradle --no-daemon -p "$PROJECT_DIR" assembleDebug
 
