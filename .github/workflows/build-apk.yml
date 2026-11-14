@@ -52,3 +52,7 @@ jobs:
           name: PAINEL-M10-APK
           path: '**/app/build/outputs/apk/debug/app-debug.apk'
           
+      - name: Listar arquivos do projeto
+        run: |
+          echo "=== ARQUIVOS DO PAINEL ==="
+          find projeto -type f | head -200
